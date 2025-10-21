@@ -1,35 +1,6 @@
 #include "libft.h"
 #define MAX_SIZE 10
 
-/*int	main(void)
-{
-	int	num = 12;
-	char	s[10] = "ghjkl";
-	void	*memset = malloc(20);
-	void	*bzero = malloc(15);
-	void	*memcpy_src = "dfghjkl;'dfghjkl;dfghjk";
-	void	*memcpy_dest = malloc(30);
-	void	*memmove_dest = malloc(30);
-	void	*memmove_src = "sdfghjklxcvbnm,djdafkhfkjhdkfjshdkfjhsdkjffhskdjfskhddbs djfhskldfk";
-	printf("ft_isalpha.c: %d\n", ft_isalpha(num));
-	printf("ft_isdigit.c: %d\n", ft_isdigit(num));
-	printf("ft_isalnum.c: %d\n", ft_isalnum(num));
-	printf("ft_isascii.c: %d\n", ft_isascii(num));
-	printf("ft_isprint.c: %d\n", ft_isprint(num));
-	printf("ft_strlen.c: %zu\n", ft_strlen(s));
-	printf("ft_memset.c: %s\n", (char*)ft_memset(memset, 48, 20));
-	ft_bzero(bzero, 15);
-	printf("ft_bzero.c: %s\n", (char*)bzero);
-	printf("ft_memcpy.c: %s\n", (char*)ft_memcpy(memcpy_dest, memcpy_src, 30));
-	printf("ft_memmove.c: %s\n", (char*)ft_memmove(memmove_dest, memmove_src, 14));
-	free(memset);
-	free(bzero);
-	free(memcpy_dest);
-	free(memmove_dest);
-	return (0);
-
-}*/
-
 void print_mem_block(void *ptr, size_t size)
 {
     unsigned char *p = (unsigned char *)ptr;
@@ -38,38 +9,6 @@ void print_mem_block(void *ptr, size_t size)
         printf("%02x ", p[i]);
     }
     printf("\n");
-}
-
-size_t strlcpy_safe_wrapper(char *dst, const char *src, size_t size)
-{
-    size_t src_len = strlen(src);
-    size_t copy_len = (src_len < size) ? src_len : size - 1;
-
-    if (size > 0)
-    {
-        memcpy(dst, src, copy_len);
-        dst[copy_len] = '\0';
-    }
-    return src_len;
-}
-
-size_t strlcat_safe_wrapper(char *dst, const char *src, size_t size)
-{
-    size_t dst_len = strlen(dst);
-    size_t src_len = strlen(src);
-    size_t total_len = dst_len + src_len;
-    size_t copy_limit;
-
-    if (size == 0 || dst_len >= size)
-        return total_len;
-
-    copy_limit = size - dst_len - 1;
-
-    strncpy(dst + dst_len, src, copy_limit);
-
-    dst[dst_len + copy_limit] = '\0';
-
-    return total_len;
 }
 
 int main(void)
@@ -115,7 +54,7 @@ int main(void)
     const char *cmp_s2 = "abcdeFGH";
     const char *cmp_s3 = "abc";   
     const char *cmp_s4 = "abC";    
-				     
+
     char memchr_src[15] = "hello\0world\0\0";
     int byte_to_find_1 = 'o';
     int byte_to_find_2 = '\0';
@@ -131,7 +70,35 @@ int main(void)
     const char *needle3 = "QuX";
     size_t len1 = 15;
     size_t len2 = 5;
-    size_t len3 = 3; 
+    size_t len3 = 3;     
+    
+    const char *atoi_s1 = "12345";
+    const char *atoi_s2 = "  \t\n-42";
+    const char *atoi_s3 = "+99bottles";
+    const char *atoi_s4 = "words-10";
+    const char *atoi_s5 = "0";
+    const char *atoi_s6 = "-2147483648"; 
+    const char *atoi_s7 = ""; 
+
+    // --- Variables for ft_calloc tests ---
+    int     *ft_c_arr = NULL;
+    int     *std_c_arr = NULL;
+    size_t  c_nmemb = 5;
+    size_t  c_size = sizeof(int);
+    size_t  c_i;
+    size_t  total_c_size = c_nmemb * c_size;
+
+    if (!memset_ft || !bzero_ft || !memcpy_dest_ft || !memmove_dest_ft ||
+        !memset_std || !bzero_std || !memcpy_dest_std || !memmove_dest_std)
+    {
+        printf("Error: Malloc failed.\n");
+        return 1;
+    }
+
+    // --- Malloc/Calloc variables that need to be freed later ---
+    void    *calloc_ft_ptr = NULL;
+    void    *calloc_std_ptr = NULL;
+    void    *calloc_null_check = NULL;
 
     if (!memset_ft || !bzero_ft || !memcpy_dest_ft || !memmove_dest_ft ||
         !memset_std || !bzero_std || !memcpy_dest_std || !memmove_dest_std)
@@ -170,13 +137,13 @@ int main(void)
 
     printf("\n- ft_strlcpy.c (Dest Size: %zu) -\n", (size_t)MAX_SIZE);
     size_t ft_ret = ft_strlcpy(strlcpy_dest_ft, long_src, MAX_SIZE);
-    size_t std_ret = strlcpy_safe_wrapper(strlcpy_dest_std, long_src, MAX_SIZE);
+    size_t std_ret = strlcpy(strlcpy_dest_std, long_src, MAX_SIZE);
     printf("ft_strlcpy Dest: %s | Ret Val: %zu\n", strlcpy_dest_ft, ft_ret);
     printf("  strlcpy Dest: %s | Ret Val: %zu\n", strlcpy_dest_std, std_ret);
 
     printf("\n- ft_strlcat.c (Dest Size: %zu) -\n", (size_t)MAX_SIZE);
     size_t ft_cat_ret = ft_strlcat(strlcat_dest_ft, cat_src, MAX_SIZE);
-    size_t std_cat_ret = strlcat_safe_wrapper(strlcat_dest_std, cat_src, MAX_SIZE);
+    size_t std_cat_ret = strlcat(strlcat_dest_std, cat_src, MAX_SIZE);
     printf("ft_strlcat Dest: %s | Ret Val: %zu\n", strlcat_dest_ft, ft_cat_ret);
     printf("  strlcat Dest: %s | Ret Val: %zu\n", strlcat_dest_std, std_cat_ret);
 
@@ -288,7 +255,7 @@ int main(void)
         ft_memcmp(memcmp_s1, memcmp_s2, 0), 
         memcmp(memcmp_s1, memcmp_s2, 0));
 
-printf("\n--- ft_strnstr.c (Haystack: \"%s\") ---\n", haystack);
+    printf("\n--- ft_strnstr.c (Haystack: \"%s\") ---\n", haystack);
     printf("1. Needle: \"%s\", Len: %zu\n", needle1, len1);
     printf("ft_strnstr: %s | strnstr: %s\n", 
         ft_strnstr(haystack, needle1, len1), 
@@ -314,6 +281,71 @@ printf("\n--- ft_strnstr.c (Haystack: \"%s\") ---\n", haystack);
         (void *)ft_strnstr(haystack, "", len1), 
         (void *)strnstr(haystack, "", len1));
 
+    printf("\n--- ft_atoi.c ---\n");
+    printf("1. Str: \"%s\"\n", atoi_s1);
+    printf("ft_atoi: %d | atoi: %d\n", ft_atoi(atoi_s1), atoi(atoi_s1));
+    printf("2. Str: \"%s\" (Whitespace/Neg)\n", atoi_s2);
+    printf("ft_atoi: %d | atoi: %d\n", ft_atoi(atoi_s2), atoi(atoi_s2));
+    printf("3. Str: \"%s\" (Plus sign/Trailing chars)\n", atoi_s3);
+    printf("ft_atoi: %d | atoi: %d\n", ft_atoi(atoi_s3), atoi(atoi_s3));
+    printf("4. Str: \"%s\" (No leading digit)\n", atoi_s4);
+    printf("ft_atoi: %d | atoi: %d\n", ft_atoi(atoi_s4), atoi(atoi_s4));
+    printf("5. Str: \"%s\" (Zero)\n", atoi_s5);
+    printf("ft_atoi: %d | atoi: %d\n", ft_atoi(atoi_s5), atoi(atoi_s5));
+    printf("6. Str: \"%s\" (INT_MIN)\n", atoi_s6);
+    printf("ft_atoi: %d | atoi: %d\n", ft_atoi(atoi_s6), atoi(atoi_s6));
+    printf("7. Str: \"%s\" (EMPTHY)\n", atoi_s7);
+    printf("ft_atoi: %d | atoi: %d\n", ft_atoi(atoi_s7), atoi(atoi_s7));
+    
+ printf("\n--- ft_calloc.c ---\n");
+
+    // Test 1: Basic allocation (5 ints, 20 bytes) and zero check
+    ft_c_arr = ft_calloc(c_nmemb, c_size);
+    std_c_arr = calloc(c_nmemb, c_size);
+    printf("1. Alloc %zu ints (%zu total bytes):\n", c_nmemb, total_c_size);
+    printf("   ft_calloc (hex): "); print_mem_block(ft_c_arr, total_c_size);
+    printf("   calloc (hex):   "); print_mem_block(std_c_arr, total_c_size);
+
+    // Test 2: Check values are 0 (e.g., ft_arr[3] should be 0)
+    for (c_i = 0; c_i < c_nmemb; c_i++)
+    {
+        if (ft_c_arr[c_i] != 0)
+        {
+            printf("FAIL: ft_arr[%zu] is %d (expected 0)\n", c_i, ft_c_arr[c_i]);
+            break;
+        }
+    }
+    if (c_i == c_nmemb)
+        printf("2. Data Check: PASS (All %zu elements initialized to 0)\n", c_nmemb);
+    
+    // Free the allocated blocks from Test 1 & 2
+    free(ft_c_arr);
+    free(std_c_arr);
+    
+    // Test 3: Zero-size allocation (should return a valid pointer or NULL, matching standard)
+    calloc_ft_ptr = ft_calloc(0, sizeof(int));
+    calloc_std_ptr = calloc(0, sizeof(int));
+    printf("3. Zero-size (0, sizeof(int)) Test:\n");
+    printf("   ft_calloc: %p | calloc: %p (match expected)\n", calloc_ft_ptr, calloc_std_ptr);
+    // Note: The C standard allows both NULL or a non-NULL pointer for malloc(0)/calloc(0, X), 
+    // but they must be freed. The test just checks that they both return *something*.
+    
+    // Test 4: Overflow Check (big_nmemb * overflow_size > SIZE_MAX)
+    // The test relies on your ft_calloc's SIZE_MAX check (as discussed previously).
+    size_t big_nmemb = 2; 
+    size_t overflow_size = ((size_t)-1) / 2 + 1;
+    calloc_null_check = ft_calloc(big_nmemb, overflow_size);
+    printf("4. Overflow Check (big numbers):\n");
+    if (calloc_null_check == NULL)
+        printf("   ft_calloc: %p (PASS: Correctly returned NULL on overflow)\n", calloc_null_check);
+    else
+    {
+        printf("   ft_calloc: %p (FAIL: Returned pointer on overflow)\n", calloc_null_check);
+        free(calloc_null_check); // Clean up if it failed to return NULL
+    }
+    
+    // --------------------------------------------------------------------------
+
     free(memset_ft);
     free(bzero_ft);
     free(memcpy_dest_ft);
@@ -324,5 +356,11 @@ printf("\n--- ft_strnstr.c (Haystack: \"%s\") ---\n", haystack);
     free(memcpy_dest_std);
     free(memmove_dest_std);
 
+    // Free all calloc test pointers
+    if (calloc_ft_ptr) 
+	    free(calloc_ft_ptr);
+    if (calloc_std_ptr) 
+	    free(calloc_std_ptr);
+    // calloc_null_check is already handled above
     return (0);
 }

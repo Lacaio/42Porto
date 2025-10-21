@@ -6,7 +6,7 @@
 /*   By: lprado-l <lprado-l@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 09:18:38 by lprado-l          #+#    #+#             */
-/*   Updated: 2025/10/20 09:40:43 by lprado-l         ###   ########.fr       */
+/*   Updated: 2025/10/21 19:59:25 by lprado-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,20 @@ int	number(int i, const char *nptr);
 
 int	whitespaces(int i, const char *nptr)
 {
-	while (*nptr[i] == 127 || (*nptr[i] >= 0 && *nptr[i] < 33))
+	while (nptr[i] == ' ' || (nptr[i] >= '\t' && nptr[i] <= '\r' ))
 		i++;
 	return (i);
 }
 
 int	sign(int i, int *sign, const char *nptr)
 {
-		if (*nptr[i] == 45)
+		if (nptr[i] == '-')
+		{
 			*sign = *sign * -1;
+			i++;
+		}
+		else if(nptr[i] == '+')
+			i++;
 	return (i);
 }
 
@@ -39,9 +44,9 @@ int	number(int i, const char *nptr)
 	int	num;
 
 	num = 0;
-	while (*nptr[i] > 47 && *nptr[i] < 58)
+	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
-		num = num * 10 + (*nptr[i] - 48);
+		num = num * 10 + (nptr[i] - '0');
 		i++;
 	}
 	return (num);
@@ -55,10 +60,10 @@ int	ft_atoi(const char *nptr)
 
 	sigh = 1;
 	i = 0;
-	if (!*nptr[i])
+	if (!nptr[i])
 		return (0);
-	i = whitespaces(i, *nptr);
-	i = sign(i, &sigh, *nptr);
-	num = number(i, *nptr);
+	i = whitespaces(i, nptr);
+	i = sign(i, &sigh, nptr);
+	num = number(i, nptr);
 	return (num * sigh);
 }

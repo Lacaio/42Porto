@@ -6,13 +6,14 @@
 #    By: lprado-l <lprado-l@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 12:19:20 by lprado-l          #+#    #+#              #
-#    Updated: 2025/10/20 12:32:46 by lprado-l         ###   ########.fr        #
+#    Updated: 2025/10/21 21:31:33 by lprado-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+DEBUG_CFLAGS = -g
 SRCS = ft_isalpha.c \
        ft_isdigit.c \
        ft_isalnum.c \
@@ -32,19 +33,31 @@ SRCS = ft_isalpha.c \
        ft_strncmp.c \
        ft_memchr.c \
        ft_memcmp.c \
-       ft_strnstr.c
+       ft_strnstr.c \
+       ft_atoi.c \
+       ft_calloc.c
 OBJS = $(SRCS:.c=.o)
 TEST_SRC = test.c
 TEST_EXEC = exec_prog
+DEBUG_EXEC = debug_prog
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(TEST_EXEC): $(NAME) $(TEST_SRC)
-	$(CC) $(CFLAGS) $(TEST_SRC) $(NAME) -o $@	
+	$(CC) $(CFLAGS) $(TEST_SRC) $(NAME) -o $@ -lbsd	
 
 test: $(TEST_EXEC)
 	./$(TEST_EXEC)
+
+$(DEBUG_EXEC): $(NAME) $(TEST_SRC)
+	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) $(TEST_SRC) $(NAME) -o $@ -lbsd
+
+debug: fclean
+	$(MAKE) CFLAGS="$(CFLAGS) $(DEBUG_CFLAGS)" $(DEBUG_EXEC)
+
+gdb: debug
+	gdb -tui ./$(DEBUG_EXEC)
 
 $(NAME): $(OBJS)
 	ar rcs $@ $^
@@ -55,8 +68,8 @@ clean:
 	rm -f *.o
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(TEST_EXEC) $(DEBUG_EXEC)
 
 re: fclean all
 	
-.phony: all clean fclean re test
+.phony: all clean fclean re test debug gdb
