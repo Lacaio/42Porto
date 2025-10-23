@@ -6,7 +6,7 @@
 #    By: lprado-l <lprado-l@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 12:19:20 by lprado-l          #+#    #+#              #
-#    Updated: 2025/10/21 21:31:33 by lprado-l         ###   ########.fr        #
+#    Updated: 2025/10/23 12:29:35 by lprado-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ SRCS = ft_isalpha.c \
        ft_memcmp.c \
        ft_strnstr.c \
        ft_atoi.c \
-       ft_calloc.c
+       ft_calloc.c \
+       ft_strdup.c
 OBJS = $(SRCS:.c=.o)
 TEST_SRC = test.c
 TEST_EXEC = exec_prog

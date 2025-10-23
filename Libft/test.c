@@ -11,6 +11,45 @@ void print_mem_block(void *ptr, size_t size)
     printf("\n");
 }
 
+void print_strdup_result(int test_num, const char *original, const char *copy, const char *msg)
+{
+	
+    // Print the test description first, matching the ft_atoi/ft_strnstr style
+    printf("%d. %s (Original: \"%s\")\n", test_num, msg, original);
+
+    // Check for allocation failure
+    if (copy == NULL) {
+        printf("ft_strdup: (NULL) | FAILED (Allocation error)\n");
+        return;
+    }
+
+    // 1. Check if the content is correct using strcmp
+    if (strcmp(original, copy) == 0)
+    {
+        // 2. Check if the pointer is unique (i.e., new memory was allocated)
+        if (original != copy)
+        {
+            printf("ft_strdup: \"%s\" | PASSED (New memory allocated)\n", copy);
+        }
+        else
+        {
+            // This is a logic failure for ft_strdup, as it must allocate new memory
+            printf("ft_strdup: \"%s\" | FAILED (Pointers are the same, no new allocation)\n", copy);
+        }
+    }
+    else
+    {
+        // Content Mismatch Failure
+        printf("ft_strdup: FAILED (Content mismatch. Got: \"%s\")\n", copy);
+        // Note: The ugly output you saw is due to your ft_strdup likely not null-terminating
+        // correctly, or copying garbage. The layout is now fixed, but your implementation
+        // may still show bad content here until fixed.
+    }
+
+    // Clean up allocated memory (IMPORTANT!)
+    free((void *)copy);
+}
+
 int main(void)
 {
     const char  *long_src = "A very long source string for truncation test.";
@@ -99,6 +138,8 @@ int main(void)
     void    *calloc_ft_ptr = NULL;
     void    *calloc_std_ptr = NULL;
     void    *calloc_null_check = NULL;
+
+    char    *dup_ptr = NULL;
 
     if (!memset_ft || !bzero_ft || !memcpy_dest_ft || !memmove_dest_ft ||
         !memset_std || !bzero_std || !memcpy_dest_std || !memmove_dest_std)
@@ -344,6 +385,27 @@ int main(void)
         free(calloc_null_check); // Clean up if it failed to return NULL
     }
     
+    
+    printf("\n--- ft_strdupc ---\n");
+    const char *s1_dup = "Hello, Libft!";
+    dup_ptr = ft_strdup(s1_dup);
+    print_strdup_result(1, s1_dup, dup_ptr, "Basic String");
+
+    // Test 2: Empty String Duplication (Crucial edge case)
+    const char *s2_dup = "";
+    dup_ptr = ft_strdup(s2_dup);
+    print_strdup_result(2, s2_dup, dup_ptr, "Empty String");
+
+    // Test 3: String with spaces and numbers
+    const char *s3_dup = " 42 Porto is cool 2024 ";
+    dup_ptr = ft_strdup(s3_dup);
+    print_strdup_result(3, s3_dup, dup_ptr, "Spaces and Numbers");
+
+    // Test 4: Long string
+    const char *s4_dup = "A very long string to check if the allocation can handle large lengths correctly and efficiently for several dozen bytes.";
+    dup_ptr = ft_strdup(s4_dup);
+    print_strdup_result(4, s4_dup, dup_ptr, "Long String");
+
     // --------------------------------------------------------------------------
 
     free(memset_ft);
