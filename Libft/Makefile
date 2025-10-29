@@ -6,7 +6,7 @@
 #    By: lprado-l <lprado-l@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 12:19:20 by lprado-l          #+#    #+#              #
-#    Updated: 2025/10/23 12:29:35 by lprado-l         ###   ########.fr        #
+#    Updated: 2025/10/29 12:44:09 by lprado-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,11 +36,16 @@ SRCS = ft_isalpha.c \
        ft_strnstr.c \
        ft_atoi.c \
        ft_calloc.c \
-       ft_strdup.c
+       ft_strdup.c \
+       ft_substr.c \
+       ft_strjoin.c
 OBJS = $(SRCS:.c=.o)
 TEST_SRC = test.c
 TEST_EXEC = exec_prog
 DEBUG_EXEC = debug_prog
+TEST2_SRC = test2.c
+TEST2_EXEC = exec_prog2
+DEBUG2_EXEC = debug_prog2 
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -60,6 +65,21 @@ debug: fclean
 gdb: debug
 	gdb -tui ./$(DEBUG_EXEC)
 
+$(TEST2_EXEC): $(NAME) $(TEST2_SRC)
+	$(CC) $(CFLAGS) $(TEST2_SRC) $(NAME) -o $@ -lbsd	
+
+test2: $(TEST2_EXEC)
+	./$(TEST2_EXEC)
+
+$(DEBUG2_EXEC): $(NAME) $(TEST2_SRC)
+	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) $(TEST2_SRC) $(NAME) -o $@ -lbsd
+
+debug2: fclean
+	$(MAKE) CFLAGS="$(CFLAGS) $(DEBUG_CFLAGS)" $(DEBUG2_EXEC)
+
+gdb2: debug2
+	gdb -tui ./$(DEBUG2_EXEC)
+
 $(NAME): $(OBJS)
 	ar rcs $@ $^
 
@@ -69,8 +89,8 @@ clean:
 	rm -f *.o
 
 fclean: clean
-	rm -f $(NAME) $(TEST_EXEC) $(DEBUG_EXEC)
+	rm -f $(NAME) $(TEST_EXEC) $(DEBUG_EXEC) $(TEST2_EXEC) $(DEBUG2_EXEC)
 
 re: fclean all
 	
-.phony: all clean fclean re test debug gdb
+.phony: all clean fclean re test debug gdb test2 debug2 gdb2

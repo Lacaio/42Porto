@@ -6,7 +6,7 @@
 /*   By: lprado-l <lprado-l@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:40:31 by lprado-l          #+#    #+#             */
-/*   Updated: 2025/10/23 12:29:16 by lprado-l         ###   ########.fr       */
+/*   Updated: 2025/10/29 12:32:40 by lprado-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,7 @@ char    *ft_strnstr(const char *big, const char *little, size_t len);
 int     ft_atoi(const char *nptr);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strdup(const char *s);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif

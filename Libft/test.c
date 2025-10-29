@@ -386,7 +386,7 @@ int main(void)
     }
     
     
-    printf("\n--- ft_strdupc ---\n");
+    printf("\n--- ft_strdup.c ---\n");
     const char *s1_dup = "Hello, Libft!";
     dup_ptr = ft_strdup(s1_dup);
     print_strdup_result(1, s1_dup, dup_ptr, "Basic String");
