@@ -37,6 +37,8 @@
 *.hex
 debug_prog
 exec_prog
+exec_prog2
+debug_prog2
 
 # Debug files
 *.dSYM/
