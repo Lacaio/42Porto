@@ -6,7 +6,7 @@
 /*   By: lprado-l <lprado-l@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 12:33:44 by lprado-l          #+#    #+#             */
-/*   Updated: 2025/10/29 12:40:34 by lprado-l         ###   ########.fr       */
+/*   Updated: 2025/11/04 01:21:45 by lprado-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		len1++;
 	while (s2[len2] != '\0')
 		len2++;
-	str = malloc(len1 + len2 - 1);
+	str = malloc(len1 + len2 + 1);
 	if (!str)
 		return (NULL);
 	while (i < len1)
@@ -39,9 +39,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	i = 0;
 	while 	(i < len2)
 	{
-		str[len1] = s2[i];
+		str[len1 + i] = s2[i];
 		i++;
-		len1++;
 	}
+	str[len1 + len2] = '\0';
 	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: lprado-l <lprado-l@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 11:53:12 by lprado-l          #+#    #+#             */
-/*   Updated: 2025/10/19 11:54:40 by lprado-l         ###   ########.fr       */
+/*   Updated: 2025/11/03 23:45:51 by lprado-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 int	ft_tolower(int c)
 {
 	if (c > 64 && c < 91)
-		return (c + 7);
+		return (c + 32);
 	return (c);
 }

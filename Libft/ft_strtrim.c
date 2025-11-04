@@ -1,37 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lprado-l <lprado-l@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/16 22:25:49 by lprado-l          #+#    #+#             */
-/*   Updated: 2025/11/03 23:24:11 by lprado-l         ###   ########.fr       */
+/*   Created: 2025/11/04 01:23:18 by lprado-l          #+#    #+#             */
+/*   Updated: 2025/11/04 01:24:51 by lprado-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	*ft_memmove(void *dest, const void *src, size_t n)
+char *ft_strtrim(char const *s1, char const *set)
 {
-	size_t	i;
-	
-	i = 0;
-	if (dest < src)
-	{
-		while (i < n)
-		{
-			((char*)dest)[i] = ((char*)src)[i];
-			i++;
-		}
-	}
-	else
-	{
-		while (n > 0 && (dest != NULL || src != NULL))
-		{
-			((char*)dest)[n -1] = ((char*)src)[n - 1];
-			n--;
-		}
-	}
-	return (dest);
+
 }
