@@ -6,7 +6,7 @@
 /*   By: lprado-l <lprado-l@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 01:23:18 by lprado-l          #+#    #+#             */
-/*   Updated: 2025/11/04 12:40:34 by lprado-l         ###   ########.fr       */
+/*   Updated: 2025/11/05 23:58:57 by lprado-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,29 @@
 
 char *ft_strtrim(char const *s1, char const *set)
 {
-int	i;
-int	j;
-int	k;
-int	len_s1;
-int	len_set;
-char	*str;
+	int	i;
+	int	start;
+	int	end;
+	char	*str;
 
-i = 0;
-j = 0;
-len_set = 0;
-len_s1 = 0;
-while (set[len_set] != '\0')
-	len_set++;
-while (s1[len_s1] != '\0')
-	len_s1++;
-while (s1[i] == set[j] && s1[i] != '\0')
-{
-	j++;
-	if (set[j] == '\0')
-		j = 0;
-	i++;
-
-}
-while (
+	str = (void *) 0;
+	if (!s1)
+		return (str);
+	start = 0;
+	while (s1[start] && ft_strchr(set, s1[start]))
+		start++;
+	end = ft_strlen(s1);
+	while (end > start && ft_strchr(set, s1[end - 1]))
+		end--;
+	str = malloc(end - start + 1);
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (i < (end - start))
+	{
+		str[i] = s1[start + i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }
