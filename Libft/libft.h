@@ -6,7 +6,7 @@
 /*   By: lprado-l <lprado-l@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:40:31 by lprado-l          #+#    #+#             */
-/*   Updated: 2025/11/06 01:33:05 by lprado-l         ###   ########.fr       */
+/*   Updated: 2025/11/06 16:32:39 by lprado-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ char	*ft_strdup(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
-char **ft_split(char const *s, char c);
+char	**ft_split(char const *s, char c);
 
 #endif
