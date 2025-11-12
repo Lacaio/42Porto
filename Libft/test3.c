@@ -6,10 +6,12 @@
 /*   By: lprado-l <lprado-l@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 21:04:35 by lprado-l          #+#    #+#             */
-/*   Updated: 2025/11/10 21:09:04 by lprado-l         ###   ########.fr       */
+/*   Updated: 2025/11/12 20:31:25 by lprado-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h" // Assuming ft_putchar_fd and ft_putstr_fd are declared here
+
+#include "libft.h" 
+
 // // ----------------------------------------------------------------------------
 // --- Function to test writing an integer to a temporary file descriptor (ft_putnbr_fd) ---
 // ----------------------------------------------------------------------------

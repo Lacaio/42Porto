@@ -6,7 +6,7 @@
 #    By: lprado-l <lprado-l@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 12:19:20 by lprado-l          #+#    #+#              #
-#    Updated: 2025/11/12 19:52:54 by lprado-l         ###   ########.fr        #
+#    Updated: 2025/11/12 20:28:20 by lprado-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,6 +104,9 @@ debug2: fclean
 
 gdb2: debug2
 	gdb -tui ./$(DEBUG2_EXEC)
+
+$(TEST3_EXEC): $(NAME) $(TEST3_SRC)
+	$(CC) $(CFLAGS) $(TEST3_SRC) $(NAME) -o $@ -lbsd
 
 test3: $(TEST3_EXEC)
 	./$(TEST3_EXEC)
