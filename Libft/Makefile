@@ -6,14 +6,15 @@
 #    By: lprado-l <lprado-l@student.42porto.co      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/13 12:19:20 by lprado-l          #+#    #+#              #
-#    Updated: 2025/11/06 01:32:45 by lprado-l         ###   ########.fr        #
+#    Updated: 2025/11/12 19:52:54 by lprado-l         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -I.
 DEBUG_CFLAGS = -g
+
 SRCS = ft_isalpha.c \
        ft_isdigit.c \
        ft_isalnum.c \
@@ -40,14 +41,36 @@ SRCS = ft_isalpha.c \
        ft_substr.c \
        ft_strjoin.c \
        ft_strtrim.c \
-       ft_split.c
+       ft_split.c \
+       ft_itoa.c \
+       ft_strmapi.c \
+       ft_striteri.c \
+       ft_putchar_fd.c \
+       ft_putstr_fd.c \
+       ft_putendl_fd.c \
+       ft_putnbr_fd.c
 OBJS = $(SRCS:.c=.o)
+
+BONUS_SRCS = ft_lstnew.c \
+	     ft_lstadd_front.c \
+	     ft_lstsize.c \
+	     ft_lstlast.c \
+	     ft_lstadd_back.c \
+	     ft_lstdelone.c \
+	     ft_lstclear.c \
+	     ft_lstiter.c \
+	     ft_lstmap.c
+BONUS_OBJS = $(BONUS_SRCS: .c=.o)
+
 TEST_SRC = test.c
 TEST_EXEC = exec_prog
 DEBUG_EXEC = debug_prog
 TEST2_SRC = test2.c
 TEST2_EXEC = exec_prog2
 DEBUG2_EXEC = debug_prog2 
+TEST3_SRC = test3.c
+TEST3_EXEC = exec_prog3
+DEBUG3_EXEC = debug_prog3
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -82,11 +105,25 @@ debug2: fclean
 gdb2: debug2
 	gdb -tui ./$(DEBUG2_EXEC)
 
+test3: $(TEST3_EXEC)
+	./$(TEST3_EXEC)
+
+$(DEBUG3_EXEC): $(NAME) $(TEST3_SRC)
+	$(CC) $(CFLAGS) $(DEBUG_CFLAGS) $(TEST3_SRC) $(NAME) -o $@ -lbsd
+
+debug3: fclean
+	$(MAKE) CFLAGS="$(CFLAGS) $(DEBUG_CFLAGS)" $(DEBUG3_EXEC)
+
+gdb3: debug3
+	gdb -tui ./$(DEBUG3_EXEC)
+
 $(NAME): $(OBJS)
 	ar rcs $@ $^
 
 all: $(NAME)
 
+bonus:	$(OBJS) $(BONUS_OBJS)
+		ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
 clean:
 	rm -f *.o
 
@@ -95,4 +132,4 @@ fclean: clean
 
 re: fclean all
 	
-.phony: all clean fclean re test debug gdb test2 debug2 gdb2
+.phony: all clean fclean re test debug gdb test2 debug2 gdb2 test3 debug3 gdb3
