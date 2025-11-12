@@ -41,6 +41,8 @@ exec_prog2
 debug_prog2
 exec_prog3
 debug_prog3
+exec_prog4
+debug_prog4
 
 # Debug files
 *.dSYM/
