@@ -6,10 +6,9 @@
 /*   By: lprado-l <lprado-l@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 00:02:46 by lprado-l          #+#    #+#             */
-/*   Updated: 2025/11/12 19:19:27 by lprado-l         ###   ########.fr       */
+/*   Updated: 2025/11/13 21:06:54 by lprado-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 static int	word_len(char const *s, char c)
@@ -41,59 +40,46 @@ static int	word_count(char const *s, char c)
 	return (count);
 }
 
-static void	free_all(char **str, int j)
+static void	*free_all(char **arr, int j)
 {
 	while (j >= 0)
-		free(str[j--]);
-	free(str);
-}
-
-static char	*make_word(char const *s, char c)
-{
-	char	*word;
-	int		i;
-	int		len;
-
-	len = word_len(s, c);
-	word = malloc(sizeof(char) * (len + 1));
-	if (!word)
-		return (NULL);
-	i = 0;
-	while (s[i] && s[i] != c)
 	{
-		word[i] = s[i];
-		i++;
+		free(arr[j]);
+		j--;
 	}
-	word[i] = '\0';
-	return (word);
+	free(arr);
+	return (NULL);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**split;
+	char	**arr;
 	int		i;
 	int		j;
+	int		len;
 
 	if (!s)
 		return (NULL);
-	split = malloc(sizeof(char *) * (word_count(s, c) + 1));
-	if (!split)
-		return (NULL);
 	i = 0;
 	j = 0;
-	while (*s)
+	arr = malloc(sizeof(char *) * (word_count(s, c) + 1));
+	if (!arr)
+		return (NULL);
+	while (s[i])
 	{
-		while (*s && *s == c)
-			s++;
-		if (*s)
+		while (s[i] && s[i] == c)
+			i++;
+		if (s[i])
 		{
-			split[j] = make_word(s, c);
-			if (!split[j])
-				return (free_all(split, j - 1), NULL);
+			len = word_len(s + i, c);
+			arr[j] = malloc(sizeof(char) * (len + 1));
+			if (!arr[j])
+				return (free_all(arr, j - 1));
+			ft_strlcpy(arr[j], s + i, len + 1);
+			i += len;
 			j++;
-			s += word_len(s, c);
 		}
 	}
-	split[j] = NULL;
-	return (split);
+	arr[j] = NULL;
+	return (arr);
 }

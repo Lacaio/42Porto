@@ -6,7 +6,7 @@
 /*   By: lprado-l <lprado-l@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:40:31 by lprado-l          #+#    #+#             */
-/*   Updated: 2025/11/12 20:49:54 by lprado-l         ###   ########.fr       */
+/*   Updated: 2025/11/13 21:34:26 by lprado-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 # include <string.h>
 # include <ctype.h>
 # include <bsd/string.h>
-# include <fcntl.h>      // For open flags (O_CREAT, O_WRONLY, O_TRUNC, O_RDONLY)
-# include <sys/stat.h>   // For open modes
-			 //
+# include <fcntl.h>      
+# include <sys/stat.h>
+
 typedef struct s_list
 {
 void *content;

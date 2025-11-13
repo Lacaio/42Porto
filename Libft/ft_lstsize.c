@@ -6,20 +6,20 @@
 /*   By: lprado-l <lprado-l@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 19:05:42 by lprado-l          #+#    #+#             */
-/*   Updated: 2025/11/11 19:50:39 by lprado-l         ###   ########.fr       */
+/*   Updated: 2025/11/13 21:14:10 by lprado-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-int ft_lstsize(t_list *lst)
+int	ft_lstsize(t_list *lst)
 {
-  int len;
+	int	len;
 
-  len = 0;
-  while (lst)
-  {
-    lst = lst->next;
-    len++;
-  }
-  return (len);
+	len = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		len++;
+	}
+	return (len);
 }

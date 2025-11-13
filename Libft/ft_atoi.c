@@ -6,7 +6,7 @@
 /*   By: lprado-l <lprado-l@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 09:18:38 by lprado-l          #+#    #+#             */
-/*   Updated: 2025/10/21 19:59:25 by lprado-l         ###   ########.fr       */
+/*   Updated: 2025/11/13 21:21:55 by lprado-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ int	whitespaces(int i, const char *nptr)
 
 int	sign(int i, int *sign, const char *nptr)
 {
-		if (nptr[i] == '-')
-		{
-			*sign = *sign * -1;
-			i++;
-		}
-		else if(nptr[i] == '+')
-			i++;
+	if (nptr[i] == '-')
+	{
+		*sign = *sign * -1;
+		i++;
+	}
+	else if (nptr[i] == '+')
+		i++;
 	return (i);
 }
 

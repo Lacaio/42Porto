@@ -1,6 +1,10 @@
 #include "libft.h"
 
-// Helper functions
+void del(void *content)
+{
+    if (content)
+        free(content);
+}
 void print_content(void *content)
 {
     if (content)
@@ -18,7 +22,6 @@ void *duplicate_uppercase(void *content)
     return str;
 }
 
-// Test function for linked list operations
 void test_list_operations(void)
 {
     t_list *list = NULL;
@@ -46,12 +49,12 @@ void test_list_operations(void)
     last = ft_lstlast(list);
     printf("Last element: %s\n", (char *)last->content);
 
-    printf("\n=== TEST: Delete one node ===\n");
-    tmp = list->next; // delete second node
-    ft_lstdelone(tmp, free);
-    list->next = list->next->next; // reconnect
-    ft_lstiter(list, print_content);
-    printf("Size after deletion: %d\n", ft_lstsize(list));
+printf("\n=== TEST: Delete one node ===\n");
+tmp = list->next; 
+list->next = tmp->next; 
+ft_lstdelone(tmp, del);
+ft_lstiter(list, print_content);
+printf("Size after deletion: %d\n", ft_lstsize(list));
 
     printf("\n=== TEST: Map list to uppercase ===\n");
     mapped = ft_lstmap(list, duplicate_uppercase, free);
@@ -63,7 +66,6 @@ void test_list_operations(void)
     printf("Lists cleared. list=%p, mapped=%p\n", (void *)list, (void *)mapped);
 }
 
-// Main function
 int main(void)
 {
     test_list_operations();

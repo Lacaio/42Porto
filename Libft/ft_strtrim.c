@@ -6,17 +6,17 @@
 /*   By: lprado-l <lprado-l@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 01:23:18 by lprado-l          #+#    #+#             */
-/*   Updated: 2025/11/05 23:58:57 by lprado-l         ###   ########.fr       */
+/*   Updated: 2025/11/13 21:18:22 by lprado-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	int	i;
-	int	start;
-	int	end;
+	int		i;
+	int		start;
+	int		end;
 	char	*str;
 
 	str = (void *) 0;
