@@ -6,13 +6,13 @@
 /*   By: lprado-l <lprado-l@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 15:09:07 by lprado-l          #+#    #+#             */
-/*   Updated: 2025/11/16 18:19:38 by lprado-l         ###   ########.fr       */
+/*   Updated: 2025/11/16 21:31:41 by lprado-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_write(int n, char *num, int *i)
+static void	ft_write(int n, char *num, int *i)
 {
 	long int	number;
 
@@ -31,7 +31,7 @@ void	ft_write(int n, char *num, int *i)
 	(*i)++;
 }
 
-void	count(int n, int *counter)
+static void	count(int n, int *counter)
 {
 	long int	num;
 

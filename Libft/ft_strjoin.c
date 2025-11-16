@@ -6,13 +6,13 @@
 /*   By: lprado-l <lprado-l@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 12:33:44 by lprado-l          #+#    #+#             */
-/*   Updated: 2025/11/16 20:22:44 by lprado-l         ###   ########.fr       */
+/*   Updated: 2025/11/16 21:34:19 by lprado-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_copy_and_terminate(char *dst, char const *s1,
+static void	ft_copy_and_terminate(char *dst, char const *s1,
 	char const *s2, size_t total_len)
 {
 	size_t	i;
