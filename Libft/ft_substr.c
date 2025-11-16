@@ -6,7 +6,7 @@
 /*   By: lprado-l <lprado-l@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 12:15:10 by lprado-l          #+#    #+#             */
-/*   Updated: 2025/11/16 18:11:00 by lprado-l         ###   ########.fr       */
+/*   Updated: 2025/11/16 20:06:31 by lprado-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,26 @@
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*sub_str;
-	size_t	i;
-	size_t	l;
+	size_t	s_len;
+	size_t	actual_len;
 
-	i = 0;
-	l = 0;
-	while (s[l] != '\0')
-		l++;
-	if (start > l)
+	if (!s)
+		return (NULL);
+	s_len = ft_strlen(s);
+	if (start >= s_len)
 	{
-		sub_str = malloc(1);
+		sub_str = (char *)malloc(1);
 		if (!sub_str)
 			return (NULL);
 		*sub_str = '\0';
 		return (sub_str);
 	}
-	if (len + start > l)
-		len = l - start;
-	sub_str = malloc(len + 1);
+	actual_len = len;
+	if (len > s_len - start)
+		actual_len = s_len - start;
+	sub_str = (char *)malloc(actual_len + 1);
 	if (!sub_str)
 		return (NULL);
-	while (s[start] != '\0' && i < len && start <= l)
-	{
-		sub_str[i] = s[start + i];
-		i++;
-	}
-	sub_str[i] = '\0';
+	ft_strlcpy(sub_str, s + start, actual_len + 1);
 	return (sub_str);
 }

@@ -6,7 +6,7 @@
 /*   By: lprado-l <lprado-l@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 00:02:46 by lprado-l          #+#    #+#             */
-/*   Updated: 2025/11/13 21:06:54 by lprado-l         ###   ########.fr       */
+/*   Updated: 2025/11/16 19:48:13 by lprado-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -51,35 +51,48 @@ static void	*free_all(char **arr, int j)
 	return (NULL);
 }
 
+static int	fill_arr(char **arr, char const *s, char c)
+{
+	int	j;
+	int	len;
+
+	j = 0;
+	while (*s)
+	{
+		while (*s && *s == c)
+			s++;
+		if (*s)
+		{
+			len = word_len(s, c);
+			arr[j] = malloc((len + 1) * sizeof(char));
+			if (!arr[j])
+			{
+				free_all(arr, j - 1);
+				return (-1);
+			}
+			ft_strlcpy(arr[j], s, len + 1);
+			j++;
+			s += len;
+		}
+	}
+	return (j);
+}
+
 char	**ft_split(char const *s, char c)
 {
 	char	**arr;
-	int		i;
+	int		count;
 	int		j;
-	int		len;
 
 	if (!s)
 		return (NULL);
-	i = 0;
-	j = 0;
-	arr = malloc(sizeof(char *) * (word_count(s, c) + 1));
+	count = word_count(s, c);
+	arr = malloc(sizeof(char *) * (count + 1));
 	if (!arr)
 		return (NULL);
-	while (s[i])
-	{
-		while (s[i] && s[i] == c)
-			i++;
-		if (s[i])
-		{
-			len = word_len(s + i, c);
-			arr[j] = malloc(sizeof(char) * (len + 1));
-			if (!arr[j])
-				return (free_all(arr, j - 1));
-			ft_strlcpy(arr[j], s + i, len + 1);
-			i += len;
-			j++;
-		}
-	}
+	j = fill_arr(arr, s, c);
+	if (j < 0)
+		return (NULL);
 	arr[j] = NULL;
 	return (arr);
 }
