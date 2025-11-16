@@ -6,7 +6,7 @@
 /*   By: lprado-l <lprado-l@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 03:55:14 by lprado-l          #+#    #+#             */
-/*   Updated: 2025/11/11 04:06:34 by lprado-l         ###   ########.fr       */
+/*   Updated: 2025/11/16 18:32:30 by lprado-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -17,7 +17,7 @@ void	writechar(int c, int fd)
 	write(fd, &c, 1);
 }
 
-void ft_putnbr_fd(int n, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
 	long int	number;
 

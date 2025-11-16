@@ -6,7 +6,7 @@
 /*   By: lprado-l <lprado-l@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 15:09:07 by lprado-l          #+#    #+#             */
-/*   Updated: 2025/11/13 21:42:57 by lprado-l         ###   ########.fr       */
+/*   Updated: 2025/11/16 18:19:38 by lprado-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	count(int n, int *counter)
 char	*ft_itoa(int n)
 {
 	char	*num;
-	int	i;
-	int	counter;
+	int		i;
+	int		counter;
 
 	i = 0;
 	counter = 0;

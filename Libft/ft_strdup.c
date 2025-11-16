@@ -6,7 +6,7 @@
 /*   By: lprado-l <lprado-l@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 12:07:50 by lprado-l          #+#    #+#             */
-/*   Updated: 2025/10/23 12:46:48 by lprado-l         ###   ########.fr       */
+/*   Updated: 2025/11/16 18:34:31 by lprado-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strdup(const char *s)
 {
-	int	i;
+	int		i;
 	char	*str;
 
 	i = 0;

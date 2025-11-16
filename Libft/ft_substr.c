@@ -6,7 +6,7 @@
 /*   By: lprado-l <lprado-l@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 12:15:10 by lprado-l          #+#    #+#             */
-/*   Updated: 2025/11/04 00:56:25 by lprado-l         ###   ########.fr       */
+/*   Updated: 2025/11/16 18:11:00 by lprado-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*sub_str;
 	size_t	i;
-	size_t l;
+	size_t	l;
 
 	i = 0;
 	l = 0;

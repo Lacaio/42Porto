@@ -6,7 +6,7 @@
 /*   By: lprado-l <lprado-l@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 12:14:43 by lprado-l          #+#    #+#             */
-/*   Updated: 2025/10/20 12:18:39 by lprado-l         ###   ########.fr       */
+/*   Updated: 2025/11/16 19:33:14 by lprado-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t	i;
-	const unsigned char *c1;
-	const unsigned char *c2;
+	size_t				i;
+	const unsigned char	*c1;
+	const unsigned char	*c2;
 
 	c1 = (const unsigned char *)s1;
 	c2 = (const unsigned char *)s2;
