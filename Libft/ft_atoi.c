@@ -6,19 +6,11 @@
 /*   By: lprado-l <lprado-l@student.42porto.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 09:18:38 by lprado-l          #+#    #+#             */
-/*   Updated: 2025/11/16 21:38:37 by lprado-l         ###   ########.fr       */
+/*   Updated: 2025/11/17 22:07:17 by lprado-l         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-int			ft_atoi(const char *nptr);
-
-static int	whitespaces(int i, const char *nptr);
-
-static int	sign(int t, int *sign, const char *nptr);
-
-static int	number(int i, const char *nptr);
 
 static int	whitespaces(int i, const char *nptr)
 {
